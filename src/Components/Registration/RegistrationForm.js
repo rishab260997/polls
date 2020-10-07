@@ -96,7 +96,7 @@ const Registration = () => {
                                 <h6 style={{ color: "Red" }}>{regisstatus.error.message}</h6>
                             ) : null}
                             {regisstatus.isRegistered ? (
-                                <h6 style={{ color: "green" }}>
+                                <h6 style={{ color: "black" }}>
                                     You have Successfully Registered
                                 </h6>
                             ) : null}

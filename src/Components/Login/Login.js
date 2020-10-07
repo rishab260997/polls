@@ -26,10 +26,10 @@ const Login = () => {
             localStorage.getItem("token") &&
             localStorage.getItem("userType") === "Admin"
         ) {
-            history.push("/welcome");
+            history.push("/welcomeAdmin");
         } else {
             localStorage.clear();
-            history.push("/");
+            history.push("/welcomeGuest");
         }
     }, []);
     useEffect(() => {
@@ -52,7 +52,7 @@ const Login = () => {
     return (
         <div>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home">Poll Management System</Navbar.Brand>
+                <Navbar.Brand href="#home">Poll Management Systemf</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Nav.Link href="#home">Home</Nav.Link>
                     <Nav.Link href="#features">Features</Nav.Link>
