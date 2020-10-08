@@ -5,8 +5,8 @@ import { Form, Button, Container, Navbar, Nav, Spinner } from 'react-bootstrap';
 import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
-    const [username, setusername] = useState("");
-    const [password, setpassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const dispatch = useDispatch();
     const history = useHistory();
     const state = useSelector((state) => {
@@ -18,8 +18,8 @@ const Login = () => {
             password: password.trim(),
         };
         dispatch(LoginRequest(loginData));
-        setusername("");
-        setpassword("");
+        setUsername("");
+        setPassword("");
     };
     useEffect(() => {
         if (
@@ -29,7 +29,7 @@ const Login = () => {
             history.push("/welcomeAdmin");
         } else {
             localStorage.clear();
-            history.push("/welcomeGuest");
+            history.push("/");
         }
     }, []);
     useEffect(() => {
@@ -40,7 +40,7 @@ const Login = () => {
     useEffect(() => {
         if (state.isLogin && localStorage.getItem("token")) {
             if (state.response.role.toLowerCase() === "admin") {
-                history.push("/welcome");
+                history.push("/admindashboard");
                 localStorage.setItem("userType", state.response.role);
             } else {
                 localStorage.clear();
@@ -52,7 +52,7 @@ const Login = () => {
     return (
         <div>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home">Poll Management Systemf</Navbar.Brand>
+                <Navbar.Brand href="#home">Poll Management System</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Nav.Link href="#home">Home</Nav.Link>
                     <Nav.Link href="#features">Features</Nav.Link>
@@ -68,13 +68,13 @@ const Login = () => {
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>User Name:</Form.Label>
                         <Form.Control
-                            type="email"
+                            type="text"
                             placeholder="Enter Username"
                             value={username}
-                            onChange={(e) => setusername(e.target.value)}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                         <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
+                            We'll never share your username with anyone else.
                     </Form.Text>
                     </Form.Group>
 
@@ -84,7 +84,7 @@ const Login = () => {
                             type="password"
                             placeholder="Password"
                             value={password}
-                            onChange={(e) => setpassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </Form.Group>
                     <Button type="Submit" variant="dark" size="lg" block
@@ -102,7 +102,9 @@ const Login = () => {
                             )}
                     </Button>
                     {state.error ? (
-                        <h6 style={{ color: "red" }}>User does not exists</h6>
+                        <h6 style={{ color: "red", textAlign: "center" }}>
+                            Incorrect Credentials
+                        </h6>
                     ) : null}
                 </Form>
             </Container>

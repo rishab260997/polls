@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Spinner, Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -97,7 +97,7 @@ const Registration = () => {
                             ) : null}
                             {regisstatus.isRegistered ? (
                                 <h6 style={{ color: "black" }}>
-                                    You have Successfully Registered
+                                    Registration Successful
                                 </h6>
                             ) : null}
                         </div>
