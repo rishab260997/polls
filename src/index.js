@@ -1,17 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
-
-// import watchAllSaga from "./saga/combineSaga";
-//import { loginRequest } from "./saga/Loginsaga";
-//import PollListsaga from "./saga/PollListsaga";
-//import CreatePollRequest from "./saga/CreatePollsaga";
-import watchAllSaga from "./saga/combineSaga";
+import watchAllSaga from "./Saga/combineSaga";
 import rootReducer from "../src/Redux/reducers/combinereducer";
 
 const sagaMiddleware = createSagaMiddleware();
