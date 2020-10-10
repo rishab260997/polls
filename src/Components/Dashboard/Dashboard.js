@@ -5,6 +5,8 @@ import {
     Navbar,
     Button,
     Nav,
+    Jumbotron,
+    Container
 } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { ListPollRequest } from "../../Redux/createAction/createAction";
@@ -29,16 +31,20 @@ const Dashboard = () => {
         setlatestPoll(pollList);
     });
 
-    const poll = [...latestPoll].reverse();
-    
+    const poll = [...latestPoll];
+
+    const handleEditPoll=(id)=>{
+        history.push(`/editpoll/${id}`);
+    }
+
     const handleLogout = () => {
         localStorage.clear();
-        history.push("/");
+        history.push("/login");
     };
     return (
-        <React.Fragment>
+        <div>
             <Navbar bg="dark" variant="dark">
-                <Link to="/login">
+                <Link to="/admindashboard">
                     <Navbar.Brand>Polling Page</Navbar.Brand>
                 </Link>
                 <Nav className="mr-auto">
@@ -49,39 +55,41 @@ const Dashboard = () => {
                     <Button variant="success">Add Poll</Button>
                 </Link>
                 <span>_</span>
-                <Link to="/">
                     <Button
-                        className="logout"
                         variant="danger"
                         onClick={handleLogout}
                     >
                         Log Out
           </Button>
-                </Link>
             </Navbar>
-            {pollstatus === false ? (
-                <Spinner className="spinner" animation="border" variant="primary" />
-            ) : null}
-            {poll.map((item) => (
-                <Card key={item._id} className="Card">
-                    <Card.Body >
-                        <div className="Card1">
-                            <Card.Title>Title :{item.title}</Card.Title>
-                            {item.options.map((option, i) => (
-                                <div key={i}>
-                                    <input type="radio" name={item._id} />
-                                    <label>{option.option}</label>
+            <Jumbotron>
+                <Container>
+                    {pollstatus === false ? (
+                        <center>
+                        <Spinner className="spinner" animation="grow" variant="dark" />
+                        </center>
+                    ) : null}
+                    {poll.map((item) => (
+                        <Card key={item._id} className="Card">
+                            <Card.Body >
+                                <div>
+                                    <Card.Title>Title :{item.title}</Card.Title>
+                                    {item.options.map((option, i) => (
+                                        <div key={i}>
+                                            <input type="radio" name={item._id} />
+                                            <label>{option.option}</label>
+                                            <label className="float-right">Votes:{option.vote}</label>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                        <hr />
-                        <Link to="/editpoll">
-                            <Button variant="dark">Edit Poll</Button>
-                        </Link>
-                    </Card.Body>
-                </Card>
-            ))}
-        </React.Fragment>
+                                <hr />
+                                    <Button variant="warning" onClick={()=>handleEditPoll(item._id)}>Edit Poll</Button>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                </Container>
+            </Jumbotron>
+        </div>
     );
 };
 export default Dashboard;

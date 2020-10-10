@@ -36,7 +36,7 @@ const Registration = () => {
 
                 </Nav>
                 <Link to="/">
-                    <Button className="float-right" variant="outline-info">
+                    <Button className="float-right" variant="success">
                         Sign In
                     </Button>
                 </Link>
@@ -83,7 +83,7 @@ const Registration = () => {
                         >
                             {regisstatus.isLoading === true ? (
                                 <Spinner
-                                    animation="border"
+                                    animation="grow"
                                     size="sm"
                                     role="status"
                                     aria-hidden="true"
