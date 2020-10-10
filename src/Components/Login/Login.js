@@ -22,27 +22,15 @@ const Login = () => {
         setPassword("");
     };
     useEffect(() => {
-        if (
-            localStorage.getItem("token") &&
-            localStorage.getItem("userType") === "Admin"
-        ) {
-            history.push("/welcomeAdmin");
-        } else {
-            localStorage.clear();
-            history.push("/");
-        }
-    }, []);
-    useEffect(() => {
-        if (localStorage.getItem("token") === false) {
-            history.push("/");
-        }
-    });
-    useEffect(() => {
         if (state.isLogin && localStorage.getItem("token")) {
             if (state.response.role.toLowerCase() === "admin") {
                 history.push("/admindashboard");
                 localStorage.setItem("userType", state.response.role);
-            } else {
+            }   else if(state.response.role.toLowerCase() === "guest"){
+                history.push("/pollpage");
+                localStorage.setItem("userType", state.response.role);
+            } 
+            else {
                 localStorage.clear();
                 history.push("/");
             }
@@ -58,7 +46,7 @@ const Login = () => {
                     <Nav.Link href="#features">Features</Nav.Link>
                 </Nav>
                 <Link to="/registration">
-                    <Button className="float-right" variant="outline-info">
+                    <Button className="float-right" variant="success">
                         SignUp
                     </Button>
                 </Link>
@@ -92,8 +80,7 @@ const Login = () => {
                         onClick={handleSubmit}>
                         {state.isLoading ? (
                             <Spinner
-                                animation="border"
-                                size="sm"
+                                animation="grow"
                                 role="status"
                                 aria-hidden="true"
                             />
